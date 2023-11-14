@@ -14,17 +14,18 @@
                             {{ $project->type ? $project->type->name : 'Untypized' }}
                         </div>
 
-
-                        <div>
-                            <small class="text-secondary">Technologies:</small>
-                            <ul class="d-flex p-0 pt-2">
+                        <div class="d-flex gap-2">
+                            <span>Technologies:</span>
+                            <ul class="d-flex gap-1 list-unstyled">
                                 @forelse ($project->technologies as $technology)
                                     <li class="badge bg-secondary">
                                         <i class="fas fa-tag fa-xs fa-fw"></i>
                                         {{ $technology->name }}
                                     </li>
                                 @empty
-                                    <li class="badge bg-secondary">No Tech</li>
+                                    <li class="badge bg-secondary">
+                                        Untech
+                                    </li>
                                 @endforelse
                             </ul>
                         </div>

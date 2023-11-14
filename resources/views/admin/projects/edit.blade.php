@@ -73,6 +73,30 @@
                 </div>
 
                 <div class="mb-5">
+                    <label for="technologies" class="form-label">Technologies</label>
+                    <select multiple class="form-select form-select-lg" name="technologies[]" id="technologies">
+                        <option selected>Select one</option>
+
+                        @foreach ($technologies as $technology)
+                            @if ($errors->any())
+                                <option value="{{ $technology->id }}"
+                                    {{ in_array($technology->id, old('technologies', [])) ? 'selected' : '' }}>
+                                    {{ $technology->name }}
+                                </option>
+                            @else
+                                <option value="{{ $technology->id }}"
+                                    {{ $project->technologies->contains($technology) ? 'selected' : '' }}>
+                                    {{ $technology->name }}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+                @error('technologies')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+
+                <div class="mb-5">
                     <label for="description" class="form-label">Description</label>
                     <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description"
                         cols="30" rows="5" placeholder="Type a description" required>{{ old('title', $project->description) }}</textarea>
@@ -121,7 +145,8 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Add</button>
-                <a class="text-decoration-none btn btn-primary" href="{{ route('admin.projects.index') }}">Back to project
+                <a class="text-decoration-none btn btn-primary" href="{{ route('admin.projects.index') }}">Back to
+                    project
                     table</a>
 
             </form>

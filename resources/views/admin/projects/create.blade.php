@@ -60,6 +60,18 @@
                 </div>
 
                 <div class="mb-5">
+                    <label for="technologies" class="form-label">Technologies</label>
+                    <select multiple class="form-select form-select-lg" name="technologies[]" id="technologies">
+                        <option selected>Select one</option>
+                        @foreach ($technologies as $technology)
+                            <option value="{{ $technology->id }}"
+                                {{ in_array($technology->id, old('technologies', [])) ? 'selected' : '' }}>
+                                {{ $technology->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mb-5">
                     <label for="description" class="form-label">Description</label>
                     <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description"
                         cols="30" rows="5" placeholder="Type a description">{{ old('description') }}</textarea>
@@ -67,20 +79,6 @@
                         <div class="text-danger"> {{ $message }} </div>
                     @enderror
                 </div>
-
-                    <div class="mb-3">
-
-                        <div class="list-group">
-                            <span>Technology</span>
-                            @foreach (@technologies as @technology)
-                            <label class="list-group-item">
-                                <input class="form-check-input me-1" name="technologies[]" id="technologies" type="checkbox" value="">
-                                {{ $technology->name }}
-                            </label>
-                                
-                            @endforeach
-                        </div>
-                    </div>
 
                 <div class="mb-5">
                     <label for="github" class="form-label">
@@ -93,8 +91,10 @@
                         Github link</label>
                     <div class="input-group">
                         <span class="input-group-text" id="github">https://</span>
-                        <input type="text" name="github" class="form-control" id="github" aria-describedby=""
-                            basic-addon4" value="{{ old('github') }}">
+                        <input type="url" name="github" id="github"
+                            class="form-control @error('github') is-invalid @enderror" placeholder=""
+                            aria-describedby="helpId" value="{{ old('github') }}">
+                        <small id="githubHelper" class="text-muted">Type a Project git Url</small>
                         @error('github')
                             <div class="text-danger"> {{ $message }} </div>
                         @enderror
@@ -112,8 +112,10 @@
                         Link</label>
                     <div class="input-group">
                         <span class="input-group-text" id="link">https://</span>
-                        <input type="text" name="link" class="form-control" id="link" aria-describedby=""
-                            basic-addon4" value="{{ old('link') }}">
+                        <input type="url" name="link" id="link"
+                            class="form-control @error('link') is-invalid @enderror" placeholder=""
+                            aria-describedby="helpId" value="{{ old('link') }}">
+                        <small id="linkHelper" class="text-muted">Type a Project Url</small>
                         @error('link')
                             <div class="text-danger"> {{ $message }} </div>
                         @enderror
