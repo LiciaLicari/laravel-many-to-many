@@ -24,7 +24,7 @@
                                     </li>
                                 @empty
                                     <li class="badge bg-secondary">
-                                        Untech
+                                        No tech
                                     </li>
                                 @endforelse
                             </ul>

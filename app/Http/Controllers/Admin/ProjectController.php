@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Models\Project;
-use App\Models\type;
+use App\Models\Type;
 use App\Models\Technology;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
@@ -39,12 +38,11 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-
     public function store(StoreProjectRequest $request)
     {
         $val_data = $request->validated();
 
-        $val_data['slug'] = str::slug($request->title, '-');
+        $val_data['slug'] = Str::slug($request->title, '-');
         //dd($val_data);
 
         if ($request->has('cover_image')) {
@@ -53,9 +51,7 @@ class ProjectController extends Controller
         }
 
         $project = Project::create($val_data);
-        $project->technologies()->attach($request->technologies);
-
-
+        $project->technology()->attach($request->technologies);
         return to_route('admin.projects.index')->with('message', 'Project created successfully');
     }
 
@@ -65,7 +61,7 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         if ($project) {
-            return view('admin.projects.show', [compact('project')]);
+            return view('admin.projects.show', compact('project'));
         }
     }
 
@@ -74,7 +70,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all();
+        $technologies = Technology::all();
+
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -101,12 +100,14 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-
     public function destroy(Project $project)
     {
         if ($project->cover_image) {
             Storage::delete($project->cover_image);
         }
+
+        $project->technology()->detach();
+
         $project->delete();
 
         return to_route('admin.projects.index')->with('message', 'Welldone! Project deleted successfully');
