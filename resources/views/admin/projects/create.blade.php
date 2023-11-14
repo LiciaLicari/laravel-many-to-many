@@ -68,6 +68,20 @@
                     @enderror
                 </div>
 
+                    <div class="mb-3">
+
+                        <div class="list-group">
+                            <span>Technology</span>
+                            @foreach (@technologies as @technology)
+                            <label class="list-group-item">
+                                <input class="form-check-input me-1" name="technologies[]" id="technologies" type="checkbox" value="">
+                                {{ $technology->name }}
+                            </label>
+                                
+                            @endforeach
+                        </div>
+                    </div>
+
                 <div class="mb-5">
                     <label for="github" class="form-label">
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30"

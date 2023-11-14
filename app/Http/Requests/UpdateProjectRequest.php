@@ -26,6 +26,7 @@ class UpdateProjectRequest extends FormRequest
             'title' => 'bail|required|min:5|max:100',
             'cover_image' => 'required|image|max:1000',
             'description' => 'bail|required|min:10|max:300',
+            'technology_id' => ['nullable', 'exists:technologies,id'],
             'github' => 'nullable|bail|min:3|max:2048',
             'link' => 'nullable|bail|min:3|max:2048',
         ];

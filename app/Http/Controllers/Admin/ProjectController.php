@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Models\Project;
+use App\Models\type;
+use App\Models\Technology;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 
@@ -28,7 +30,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $types = Type::all();
+        $technologies = Technology::all();
+
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -47,7 +52,8 @@ class ProjectController extends Controller
             $val_data['cover_image'] = $file_path;
         }
 
-        Projects::create($val_data);
+        $project = Project::create($val_data);
+        $project->technologies()->attach($request->technologies);
         return to_route('admin.projects.index')->with('message', 'Project created successfully');
     }
 
@@ -57,7 +63,7 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         if ($project) {
-            return view('admin.projects.show', compact('project'));
+            return view('admin.projects.show', [compact('project')]);
         }
     }
 

@@ -13,6 +13,21 @@
                         <div class="badge bg-primary">
                             {{ $project->type ? $project->type->name : 'Untypized' }}
                         </div>
+
+
+                        <div>
+                            <small class="text-secondary">Technologies:</small>
+                            <ul class="d-flex p-0 pt-2">
+                                @forelse ($project->technologies as $technology)
+                                    <li class="badge bg-secondary">
+                                        <i class="fas fa-tag fa-xs fa-fw"></i>
+                                        {{ $technology->name }}
+                                    </li>
+                                @empty
+                                    <li class="badge bg-secondary">No Tech</li>
+                                @endforelse
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
