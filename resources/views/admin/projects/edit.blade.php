@@ -116,7 +116,8 @@
                         Github link</label>
                     <div class="input-group">
                         <span class="input-group-text" id="github">https://</span>
-                        <input type="text" name="github" class="form-control" id="github" aria-describedby=""
+                        <input type="text" name="github" class="form-control" id="github"
+                            aria-describedby="
                             basic-addon4" value="{{ old('github') }}">
                         @error('github')
                             <div class="text-danger"> {{ $message }} </div>
@@ -135,8 +136,8 @@
                         Link</label>
                     <div class="input-group">
                         <span class="input-group-text" id="link">https://</span>
-                        <input type="text" name="link" class="form-control" id="link" aria-describedby=""
-                            basic-addon4" value="{{ old('link') }}">
+                        <input type="text" name="link" class="form-control" id="link"
+                            aria-describedby="basic-addon4" value="{{ old('link') }}">
                         @error('link')
                             <div class="text-danger"> {{ $message }} </div>
                         @enderror
