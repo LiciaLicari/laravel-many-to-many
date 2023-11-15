@@ -11,7 +11,7 @@
                         <h4 class="card-title">{{ $project->title }}</h4>
                         <p class="card-text">{{ $project->description }}</p>
                         <div class="badge bg-primary">
-                            {{ $project->type ? $project->type->name : 'Untypized' }}
+                            {{ $project->type_id ? $project->type_id->name : 'Untypized' }}
                         </div>
 
                         <div class="d-flex gap-2">

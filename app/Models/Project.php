@@ -14,7 +14,7 @@ class Project extends Model
 
     protected $fillable = ['title', 'slug', 'cover_image', 'type_id', 'github', 'link', 'technology'];
 
-    public function generateSlug($title)
+    public static function generateSlug($title)
     {
         return Str::slug($title, '-');
     }
