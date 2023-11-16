@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('github', 2048)->nullable();
             $table->string('link', 2048)->nullable();
-            $table->string('type');
+            // $table->string('type'); ora utilizzo type_id
             $table->timestamps();
         });
     }
